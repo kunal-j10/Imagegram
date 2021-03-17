@@ -48,6 +48,9 @@ const UploadForm = ()=>{
 
 // .........
         const [image,setImage]=useState(null);
+        const [imageType,setImageType]=useState(null);
+        const [imageSize,setImageSize]=useState(null);
+        const [imageName,setImageName]=useState(null);
         const options = {
             title: 'Pick an Image',
             storageOptions:{
@@ -70,6 +73,9 @@ const UploadForm = ()=>{
                     const source = {uri: response.uri};
                     console.log(source);
                     setImage(response.uri);
+                    setImageSize(response.fileSize);
+                    setImageType(response.type);
+                    setImageName(response.fileName);
                 }
             })
         }
@@ -78,7 +84,9 @@ const UploadForm = ()=>{
             <Button
             title="open picker"
             onPress={openPicker}/>
-            {image && <Display uri={image}/>}
+            {image && <Display uri={image}
+                               fileName={imageName}
+                               fileType={imageType}/>}
             </View>
 
         );
