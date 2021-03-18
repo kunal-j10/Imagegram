@@ -10,17 +10,20 @@ const App =()=>{
     <View style={{alignContent:'center',justifyContent:'center'}}>
       
       <Text>Welcome to home</Text>
-      <UploadForm/>
-      {/* <Button
+      
+      <Button
       onPress={()=>{setModalVisibility(true)}}
-      title="Open Modal"/> */}
+      title="Open Modal"/>
 
       <Modal visible={ModalVisibility}>
 
-      
+      <UploadForm/>
+      <View style={{justifyContent:'center',alignItems:'center',marginTop:25}}>
       <Button
       onPress={()=>{setModalVisibility(false)}}
-      title="Close Modal"/>
+      title="Close Modal"
+      />
+      </View>
       </Modal>
 
     

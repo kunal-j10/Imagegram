@@ -1,56 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Image, View, Platform } from 'react-native';
+import { Button, Image, View, Platform, TextInput } from 'react-native';
 import * as ImagePicker from 'react-native-image-picker';
 import Display from './Display'
-// import * as ImagePicker from 'expo-image-picker';
-// import * as Permissions from 'expo-permissions';
 
 const UploadForm = ()=>{
-//     const [hasGallaryPermission,setHasGallaryPermission] = useState(null);
-//     const [image, setImage] = useState(null);
-//     useEffect(() => {
-//         (async () => {
-//             const gallaryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
-//             setHasGallaryPermission(gallaryStatus.status === 'granted');
-          
-//         })();
-//       }, []);
-
-//       const pickImage = async () => {
-//         let result = await ImagePicker.launchImageLibraryAsync({
-//           mediaTypes: ImagePicker.MediaTypeOptions.Images,
-//           allowsEditing: true,
-//           aspect: [1, 1],
-//           quality: 1,
-//         });
-    
-//         console.log(result);
-    
-//         if (!result.cancelled) {
-//           setImage(result.uri);
-//         }
-//       };
-
-//     if(hasGallaryPermission === false){
-//         return <View/>;
-//     }
-//     if(hasGallaryPermission === false){
-//         return <Text>No Access to gallary</Text>;
-//     }
-
-//     return (
-//         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//           <Button title="Pick an image from camera roll" onPress={pickImage} />
-          
-//         </View>
-//       )
-// }
-
 // .........
         const [image,setImage]=useState(null);
         const [imageType,setImageType]=useState(null);
         const [imageSize,setImageSize]=useState(null);
         const [imageName,setImageName]=useState(null);
+        const [fileName,setFileName]=useState(null);
+        
         const options = {
             title: 'Pick an Image',
             storageOptions:{
@@ -75,18 +35,31 @@ const UploadForm = ()=>{
                     setImage(response.uri);
                     setImageSize(response.fileSize);
                     setImageType(response.type);
-                    setImageName(response.fileName);
+                    setFileName(response.fileName);
                 }
             })
         }
+
+        const changeHandler=(text)=>{
+               setImageName(text);
+        }
         return(
             <View>
+            <TextInput style={{borderWidth:1,margin:5,marginTop:20,marginBottom:20,color:'black'}}
+                       placeholder="Enter Image Name"
+                       onChangeText={(text)=>changeHandler(text)}/>
+            <View style={{margin:15,marginRight:200}}>
             <Button
             title="open picker"
             onPress={openPicker}/>
+            </View>
             {image && <Display uri={image}
-                               fileName={imageName}
-                               fileType={imageType}/>}
+                               fileName={fileName}
+                               fileType={imageType}
+                               imageName={imageName}
+                               fileSize={imageSize}/>}
+            
+
             </View>
 
         );
