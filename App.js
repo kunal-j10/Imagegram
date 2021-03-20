@@ -1,10 +1,13 @@
 import React,{useState} from 'react';
 import {View,Text,Modal, Button} from 'react-native';
 import UploadForm from './components/screens/uploadForm';
+import Geolocation from '@react-native-community/geolocation';
+
 
 const App =()=>{
 
   const [ModalVisibility,setModalVisibility]=useState(false);
+  Geolocation.getCurrentPosition(info => console.log(info));
   return(
 
     <View style={{alignContent:'center',justifyContent:'center'}}>
